@@ -7,7 +7,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.androiddevs.shoppinglisttestingyt.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
@@ -23,7 +22,7 @@ import org.junit.runner.RunWith
  *  LargeTest  -> UI Test
  * **/
 
-@ExperimentalCoroutinesApi
+
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class ShoppingDaoTest {
@@ -32,7 +31,7 @@ class ShoppingDaoTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var database: ShoppingItemDatabase
+    private lateinit var database: ShoppingDatabase
     private lateinit var shoppingDAO: ShoppingDAO
 
     @Before
@@ -42,7 +41,7 @@ class ShoppingDaoTest {
          * allowMainThreadQueries() we need to run test on MainThread not in background thread**/
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            ShoppingItemDatabase::class.java
+            ShoppingDatabase::class.java
         ).allowMainThreadQueries().build()
         shoppingDAO = database.shoppingDao()
     }
